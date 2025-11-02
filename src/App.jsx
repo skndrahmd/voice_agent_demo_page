@@ -30,24 +30,6 @@ const App = () => {
             description="Talk to our Customer Support Agent"
             startButtonText="Start Conversation"
           />
-
-          <VoiceWidget
-            widgetId="sales-agent"
-            apiKey={VAPI_PUBLIC_KEY}
-            assistantId={SUPPORT_ASSISTANT_ID}
-            title="Sales Agent"
-            description="Speak with our sales representative"
-            startButtonText="Talk to Sales"
-          />
-
-          <VoiceWidget
-            widgetId="product-demo"
-            apiKey={VAPI_PUBLIC_KEY}
-            assistantId={DEMO_ASSISTANT_ID}
-            title="Product Demo"
-            description="Get a product demonstration"
-            startButtonText="Start Demo"
-          />
         </div>
 
 
