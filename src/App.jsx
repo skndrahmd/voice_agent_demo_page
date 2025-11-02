@@ -5,8 +5,6 @@ import './App.css';
 // Import environment variables
 const VAPI_PUBLIC_KEY = import.meta.env.VITE_VAPI_PUBLIC_KEY;
 const SALES_ASSISTANT_ID = import.meta.env.VITE_SALES_ASSISTANT_ID;
-const SUPPORT_ASSISTANT_ID = import.meta.env.VITE_SUPPORT_ASSISTANT_ID;
-const DEMO_ASSISTANT_ID = import.meta.env.VITE_DEMO_ASSISTANT_ID;
 
 const App = () => {
   return (
