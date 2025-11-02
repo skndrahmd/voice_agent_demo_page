@@ -1,0 +1,239 @@
+/* Scrift Inbound Voice Widget Styles - Card Layout */
+
+.scrift-widget-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 500;
+  padding: 30px;
+  border-radius: 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 450px;
+  min-height: 500px;
+  margin: 20px;
+}
+
+/* Landing Page Styles */
+.scrift-landing {
+  text-align: center;
+  width: 100%;
+}
+
+.scrift-title {
+  color: #fff;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.scrift-description {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
+  margin-bottom: 30px;
+  line-height: 1.5;
+}
+
+.scrift-start-button {
+  background: #fff;
+  color: #667eea;
+  border: none;
+  border-radius: 50px;
+  padding: 16px 36px;
+  font-size: 18px;
+  font-weight: 700;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 auto;
+}
+
+.scrift-start-button:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+}
+
+.scrift-start-button-icon {
+  font-size: 24px;
+}
+
+/* Active Call Container */
+.scrift-call-container {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 30px;
+  width: 100%;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Animation Container */
+.scrift-animation-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.scrift-animation-circle {
+  width: 160px;
+  height: 160px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Voice Waves */
+.scrift-waves-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.scrift-wave-bar {
+  width: 8px;
+  background: #fff;
+  border-radius: 4px;
+  height: 20px;
+  transition: height 0.3s ease;
+}
+
+.scrift-wave-bar.speaking {
+  height: 60px;
+}
+
+.scrift-wave-bar.speaking:nth-child(1) {
+  animation: wave 0.8s ease-in-out infinite 0s;
+}
+
+.scrift-wave-bar.speaking:nth-child(2) {
+  animation: wave 0.8s ease-in-out infinite 0.1s;
+}
+
+.scrift-wave-bar.speaking:nth-child(3) {
+  animation: wave 0.8s ease-in-out infinite 0.2s;
+}
+
+.scrift-wave-bar.speaking:nth-child(4) {
+  animation: wave 0.8s ease-in-out infinite 0.3s;
+}
+
+.scrift-wave-bar.speaking:nth-child(5) {
+  animation: wave 0.8s ease-in-out infinite 0.4s;
+}
+
+/* Status Section */
+.scrift-status-section {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.scrift-status-title {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.scrift-status-description {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 13px;
+}
+
+/* Control Buttons */
+.scrift-controls {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.scrift-button {
+  border: none;
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer;
+  flex: 1;
+  transition: all 0.3s ease;
+}
+
+.scrift-button:hover {
+  transform: translateY(-2px);
+}
+
+/* Mute Button */
+.scrift-mute-button {
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.scrift-mute-button:hover {
+  background: rgba(255, 255, 255, 0.35);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.scrift-mute-button.muted {
+  background: rgba(255, 165, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(255, 140, 0, 0.3);
+  border: 1px solid rgba(255, 165, 0, 0.5);
+}
+
+.scrift-mute-button.muted:hover {
+  background: rgba(255, 165, 0, 0.4);
+  box-shadow: 0 6px 16px rgba(255, 140, 0, 0.4);
+}
+
+/* End Call Button */
+.scrift-end-button {
+  background: rgba(255, 107, 107, 0.3);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(238, 90, 111, 0.3);
+  border: 1px solid rgba(255, 107, 107, 0.5);
+}
+
+.scrift-end-button:hover {
+  background: rgba(255, 107, 107, 0.4);
+  box-shadow: 0 6px 16px rgba(238, 90, 111, 0.4);
+}
+
+/* Animations */
+@keyframes wave {
+  0%, 100% {
+    height: 20px;
+  }
+  50% {
+    height: 80px;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
