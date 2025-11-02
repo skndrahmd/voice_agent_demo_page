@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Vapi from '@vapi-ai/web';
+import { useCallContext } from '../../contexts/CallContext';
 import './styles.css';
 
-const ScriftInbound = ({ 
+const VoiceWidget = ({ 
+  widgetId,
   apiKey, 
   assistantId,
   title = "Voice Assistant",
@@ -10,12 +12,17 @@ const ScriftInbound = ({
   startButtonText = "Start Conversation",
   config = {} 
 }) => {
+  const { startCall: startGlobalCall, endCall: endGlobalCall, isCallActive, hasActiveCall } = useCallContext();
   const [vapi, setVapi] = useState(null);
   const [isConnected, setIsConnected] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [transcript, setTranscript] = useState([]);
   const [isMuted, setIsMuted] = useState(false);
   const lottieRef = useRef(null);
+  
+  const isThisCallActive = isCallActive(widgetId);
+  const otherCallActive = hasActiveCall() && !isThisCallActive;
 
   useEffect(() => {
     const vapiInstance = new Vapi(apiKey);
@@ -24,14 +31,18 @@ const ScriftInbound = ({
     // Event listeners
     vapiInstance.on('call-start', () => {
       console.log('Call started');
+      setIsLoading(false);
       setIsConnected(true);
+      // Global call already set in startCall(), no need to set again
     });
 
     vapiInstance.on('call-end', () => {
       console.log('Call ended');
       setIsConnected(false);
+      setIsLoading(false);
       setIsSpeaking(false);
       setIsMuted(false);
+      endGlobalCall();
     });
 
     vapiInstance.on('speech-start', () => {
@@ -64,7 +75,17 @@ const ScriftInbound = ({
 
   const startCall = () => {
     if (vapi) {
+      setIsLoading(true);
+      startGlobalCall(widgetId); // Set global state immediately when button is clicked
       vapi.start(assistantId);
+    }
+  };
+
+  const cancelCall = () => {
+    if (vapi) {
+      vapi.stop();
+      setIsLoading(false);
+      endGlobalCall();
     }
   };
 
@@ -90,15 +111,41 @@ const ScriftInbound = ({
   }, [isConnected]);
 
   return (
-    <div className="scrift-widget-container">
+    <div className={`scrift-widget-container ${otherCallActive ? 'disabled' : ''}`}>
       {!isConnected ? (
         <div className="scrift-landing">
           <h1 className="scrift-title">{title}</h1>
           <p className="scrift-description">{description}</p>
-          <button className="scrift-start-button" onClick={startCall}>
-            <span className="scrift-start-button-icon">🎤</span>
-            {startButtonText}
-          </button>
+          {otherCallActive && (
+            <p className="scrift-disabled-message">Another agent is currently active. Please end that call first.</p>
+          )}
+          
+          {isLoading ? (
+            <div className="scrift-loading-container">
+              <button 
+                className="scrift-start-button scrift-loading-button" 
+                disabled
+              >
+                <span className="scrift-spinner"></span>
+                Connecting...
+              </button>
+              <button 
+                className="scrift-cancel-button"
+                onClick={cancelCall}
+              >
+                Cancel
+              </button>
+            </div>
+          ) : (
+            <button 
+              className="scrift-start-button" 
+              onClick={startCall}
+              disabled={otherCallActive}
+            >
+              <span className="scrift-start-button-icon">🎤</span>
+              {startButtonText}
+            </button>
+          )}
         </div>
       ) : (
         <div className="scrift-call-container">
@@ -149,4 +196,4 @@ const ScriftInbound = ({
   );
 };
 
-export default ScriftInbound;
+export default VoiceWidget;
